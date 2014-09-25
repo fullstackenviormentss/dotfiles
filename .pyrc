@@ -1,0 +1,20 @@
+# ~/.pythonstartup.py
+try:
+    import readline
+    import rlcompleter
+    import atexit
+    import os
+    import sys
+except ImportError:
+    print "Python shell enhancement modules not available."
+else:
+    histfile = os.path.join(os.environ["HOME"], ".pythonhistory")
+    import rlcompleter
+    readline.parse_and_bind("tab: complete")
+    if os.path.isfile(histfile):
+        readline.read_history_file(histfile)
+    atexit.register(readline.write_history_file, histfile)
+    print "Python shell history and tab completion are enabled."
+    os.system('clear')
+    import this
+    del os, histfile, readline, rlcompleter, atexit

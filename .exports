@@ -1,0 +1,12 @@
+export SHELL=/bin/zsh
+export PATH=$PATH:$HOME/bin:/media/storage/stuff/software/android-sdk-linux/tools:/media/storage/stuff/software/android-sdk-linux/platform-tools:/media/storage/stuff/software/android-ndk-linux
+export TERM=xterm-256color
+export PYTHONSTARTUP=~/.pyrc
+export GIT_EDITOR='subl --wait --new-window'
+export LANG=en_US.UTF-8
+export SSH_KEY_PATH="~/.ssh/isa_id"
+export VAGRANT_DEFAULT_PROVIDER=lxc
+export WORKON_HOME=~/.virtualenvs
+export PROJECTS_DIR=~/Desktop/projects
+export JIRA_URL='http://jira.razius.com:8080'
+export JIRA_NAME='razius'

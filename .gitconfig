@@ -1,0 +1,12 @@
+[user]
+	email = me@razius.com
+	name = Silviu Tantos
+[mergetool "sublime"]
+	cmd = subl -w $MERGED
+	trustExitCode = false
+[merge]
+	tool = sublime
+[core]
+        whitespace = trailing-space,space-before-tab
+[apply]
+        whitespace = fix
