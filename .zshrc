@@ -61,6 +61,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 DEFAULT_USER='razius'
-source ~/.aliases
 source ~/.exports
-source /usr/local/bin/virtualenvwrapper.sh
+source ~/.aliases
+source `which virtualenvwrapper.sh`

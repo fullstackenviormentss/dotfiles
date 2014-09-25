@@ -1,4 +1,3 @@
-export SHELL=/bin/zsh
 export PATH=$PATH:$HOME/bin:/media/storage/stuff/software/android-sdk-linux/tools:/media/storage/stuff/software/android-sdk-linux/platform-tools:/media/storage/stuff/software/android-ndk-linux
 export TERM=xterm-256color
 export PYTHONSTARTUP=~/.pyrc
