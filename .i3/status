@@ -1,0 +1,40 @@
+general {
+  colors = true
+  interval = 4
+  color_good = "#B8D597"
+  color_degraded = "#00FF00"
+  color_bad = "#FF8282"
+}
+
+order += "disk /"
+order += "disk /media/storage"
+order += "battery 0"
+order += "volume master"
+order += "time"
+
+battery 0 {
+  format = "%status %percentage %remaining"
+  integer_battery_capacity = true
+  last_full_capacity = true
+  threshold_type = percentage
+  low_threshold = 10
+}
+
+time {
+  format = "%d.%m %H:%M"
+}
+
+disk "/" {
+  format = "/: %free"
+}
+
+disk "/media/storage" {
+  format = "/media/storage/: %free"
+}
+
+volume master {
+  format = "VOL: %volume"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+}
