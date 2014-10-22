@@ -1,4 +1,4 @@
- This is a standard python config file
+# This is a standard python config file
 # Valid values can be True, False, integer numbers, strings
 # By default bpython will look for ~/.config/bpython/config or you
 # can specify a file with the --config option on the command line

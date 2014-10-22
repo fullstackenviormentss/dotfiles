@@ -25,7 +25,9 @@ set ssop-=options                       " Do not store global and local values i
 set ssop-=folds                         " Do not store folds in a session.
 set relativenumber                      " Show line numbers as relative to current line.
 let &showbreak='↪ '                     " String to put at the start of lines that have been wrapped.
-autocmd! bufwritepost .vimrc source %   " Autoreload .vimrc.
+let g:pyflakes_use_quickfix = 0
+let rdark_current_line = 1
+autocmd! bufwritepost .vimrc source %   " Autoreload .vimrc on save.
 syntax on                               " Turn on syntax highlighting.
 
 
@@ -57,12 +59,15 @@ call vundle#begin()
     Plugin 'nvie/vim-flake8'                                " Flake8 plugin for Vim.
     Plugin 'Shougo/neocomplete.vim'                         " Next generation completion framework after neocomplcache.
     Plugin 'chase/vim-ansible-yaml'                         " Support for Ansible.
+    Plugin 'MarcWeber/vim-addon-mw-utils'                   " Interpret a file by function and cache file automatically
+    Plugin 'garbas/vim-snipmate'                            " Implements some of TextMate's snippets features in Vim.
+    Plugin 'vim-scripts/tlib'                               " Some utility functions.
 call vundle#end()
 filetype plugin indent on
 
 " #### Folding ####
-set foldmethod=syntax
-set foldlevel=20
+set foldmethod=indent
+set foldlevel=99
 set foldlevelstart=20
 
 " #### Indentation ####
@@ -90,7 +95,7 @@ syntax enable               " Enable syntax highlighting.
 set t_Co=256                " Enable 256 colors. Don't forget TERM=xterm-256color
 set background=dark         " Tell Vim to use colors which look good on a dark background.
 
-colorscheme desert
+colorscheme rdark
 
 if has("gui_running")
     set guifont=Inconsolata\ for\ Powerline\ 12
@@ -103,6 +108,18 @@ else
 
 endif
 " #### Keybindings ####
+
+" Bind Ctrl+<movement> keys to move around the windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+map <leader>td <Plug>TaskList
+map <leader>g :GundoToggle<CR>
+let g:pep8_map='<leader>8'
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
@@ -160,4 +177,14 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " }
 
 
-
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
