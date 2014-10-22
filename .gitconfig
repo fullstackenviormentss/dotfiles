@@ -8,5 +8,16 @@
 	tool = sublime
 [core]
         whitespace = trailing-space,space-before-tab
+	editor = vim
+	excludesfile = /home/razius/.gitconfig_core_excludes
+	autocrlf = input
 [apply]
         whitespace = fix
+[push]
+	default = current
+[pull]
+	default = current
+[commit]
+	template = /home/razius/.gitconfig_commit_template
+[color]
+	ui = true
