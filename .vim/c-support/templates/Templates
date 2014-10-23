@@ -1,0 +1,16 @@
+§ =============================================================
+§  User Macros
+§ =============================================================
+
+SetMacro( 'AUTHOR',      'Silviu Tantos' )
+SetMacro( 'AUTHORREF',   'razius' )
+SetMacro( 'COMPANY',     'None' )
+SetMacro( 'COPYRIGHT',   'Copyright (c) |YEAR|, |AUTHOR|' )
+SetMacro( 'EMAIL',       'me@razius.com' )
+SetMacro( 'LICENSE',     'GNU General Public License' )
+SetMacro( 'ORGANIZATION','None' )
+
+§ =============================================================
+§  File Includes and Shortcuts
+§ =============================================================
+
