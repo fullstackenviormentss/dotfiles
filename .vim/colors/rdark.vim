@@ -1,4 +1,4 @@
-" Vim color file
+
 " Maintaner: Radu Dineiu <radu.dineiu@gmail.com>
 " URL: http://ld.yi.org/vim/rdark/
 " Last Change: 2007 Jun 23
