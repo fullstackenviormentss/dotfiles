@@ -16,10 +16,10 @@ draw_outline no
 draw_borders no
 draw_graph_borders no
 alignment top_right
-#gap_x 1120
-#gap_y 850
-gap_x 50
-gap_y 50
+# gap_x 1120
+# gap_y 850
+# gap_x 50
+# gap_y 50
 no_buffers no
 uppercase no
 cpu_avg_samples 2
@@ -27,14 +27,14 @@ net_avg_samples 1
 override_utf8_locale yes
 #use_spacer yes
 
-default_color 222222
+default_color 000000
 default_shade_color 222222
 default_outline_color 333333
 
-color1 333333
-color2 222222
-color3 000000
+color1 444444
+color2 333333
+color3 333333
 
 TEXT
-${voffset 10}${color1}${font Helvetica:pixelsize=110}${time %H}${color3}:${color1}${time %M}${font}${voffset -70}${offset 10}${color2}${font Helvetica:pixelsize=32}${time %d} ${font Helvetica:pixelsize=32}${time  %b} ${time %Y}${font}${voffset 10}$color1}${font Helvetica:pixelsize=42}${offset -178}${time %A}${font}
-${voffset 25}${font Helvetica:pixelsize=14}${color2}RAM: $color$mem ${color2} CPU0: $color${cpu cpu0}% ${color2}CPU1: $color${cpu cpu1}%${color2} ${color2}CPU2: $color${cpu cpu2}%${color2} ${color2}CPU3: $color${cpu cpu3}%${color2}
+${voffset 10}${color1}${font Helvetica:pixelsize=110}${time %H}${color3}:${color1}${time %M}${font}${voffset -70}${offset 10}${color2}${font Helvetica:pixelsize=32}${time %d} ${font Helvetica:pixelsize=32}${time  %b} ${time %Y}${font}${voffset 20}$color1}${font Helvetica:pixelsize=42}${offset -178}${time %A}${font}
+${alignc}${voffset 25}${font Helvetica:pixelsize=14}${color2}RAM: $color$mem ${color2} CPU0: $color${cpu cpu0}% ${color2}CPU1: $color${cpu cpu1}%${color2} ${color2}CPU2: $color${cpu cpu2}%${color2} ${color2}CPU3: $color${cpu cpu3}%${color2}

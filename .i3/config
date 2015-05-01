@@ -6,9 +6,9 @@ set $mod Mod4
 
 workspace_layout tabbed
 default_orientation auto
-new_window pixel 2
-new_float pixel 2
-hide_edge_borders vertical
+new_window pixel 5
+new_float pixel 5
+# hide_edge_borders vertical
 
 # Assign window to specific workspace
 # assign <criteria> workspace
@@ -20,8 +20,8 @@ assign [class="HipChat"] 10
 # workspace 1 output eDP1
 # workspace 2 output eDP1
 # workspace 3 output eDP1
-# workspace 4 output eDP1
-# workspace 5 output eDP1
+workspace 9 output DisplayPort-3
+workspace 10 output DisplayPort-3
 
 workspace_auto_back_and_forth no
 
@@ -32,6 +32,8 @@ for_window [class="Gnome-control-center.real"] floating enable
 for_window [class="Gcolor2"] floating enable
 for_window [title="^OpenCV$"] floating enable
 for_window [title="^Octave$"] floating enable
+for_window [class="^Octave$"] floating enable
+for_window [class="Display.im6"] floating enable
 
 ###########################
 # Look and feel
@@ -44,7 +46,7 @@ set $light_gray #5F676A
 set $light_green #B8D597
 set $white #B0B0B0
 
-font pango:Inconsolata 10
+font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
 
 #<colorclass>           <border>        <background>    <text>          <indicator>
 client.focused          $light_gray     $light_gray     $white          $dark_gray
@@ -90,22 +92,25 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23 -hist ~/.dmenu_hist
-bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23
+# bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23
+bindsym $mod+d exec rofi -show run -levenshtein-sort -location 2 -width 100 -lines 5 -fixed-num-lines -font Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 -fg "$light_gray" -bg "$dark_gray" -hlfg "$dark_gray" -hlbg "$light_green" -bw 0 -bc "$light_green" -yoffset -2 -xoffset 0 -hmode false
+# ,$white,$light_green,$light_green,$white
+bindsym $mod+Escape exec blur_lock
 
 # change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+# bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -125,7 +130,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
 bindsym $mod+c focus child
@@ -154,8 +159,22 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# multimedia keys
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-10%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+10%'
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 0
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86Favorites exec thunar
+bindsym XF86Calculator exec gnome-calculator
+bindsym XF86Launch5 exec gview
+bindsym XF86Launch6 exec google-chrome --app=http://google.com
+bindsym XF86Launch7 exec "pkill -9 hipchat; hipchat &"
+bindsym XF86Launch8 exec homebank
+bindsym Print exec scrot ~/Pictures/screenshots/%Y-%m-%d_%s.png
+
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -171,16 +190,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        # bindsym Left resize shrink width 10 px or 10 ppt
+        # bindsym Down resize grow height 10 px or 10 ppt
+        # bindsym Up resize shrink height 10 px or 10 ppt
+        # bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -188,10 +207,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Shift+d exec toggle-display.py
+bindsym $mod+Shift+d exec toggle_display
 
 ###########################
 # Autorun
 ###########################
 
-exec autostart.sh
+exec autorun

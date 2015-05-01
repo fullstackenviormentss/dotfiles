@@ -1,11 +1,19 @@
-export PATH=$PATH:$HOME/bin:/media/storage/stuff/software/android-sdk-linux/tools:/media/storage/stuff/software/android-sdk-linux/platform-tools:/media/storage/stuff/software/android-ndk-linux
 export TERM=xterm-256color
-export PYTHONSTARTUP=~/.pyrc
-export GIT_EDITOR='subl --wait --new-window'
-export LANG=en_US.UTF-8
+PATHS=(
+    '/media/storage/stuff/software/android-sdk-linux/tools'
+    '/media/storage/stuff/software/android-sdk-linux/platform-tools'
+    '/media/storage/stuff/software/android-ndk-linux'
+    '~/.local/bin'
+    '~/bin'
+)
+export PATH=${PATH}$(printf ":%s" "${PATHS[@]}")
+export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7/site-packages/
 export SSH_KEY_PATH="~/.ssh/isa_id"
+export PYTHONSTARTUP=~/.pyrc
+
 export VAGRANT_DEFAULT_PROVIDER=lxc
+export ANSIBLE_NOCOWS=1
+
 export WORKON_HOME=~/.virtualenvs
+export NOTES_FOLDER=~/Desktop/notes
 export PROJECTS_DIR=~/Desktop/projects
-export JIRA_URL='http://jira.razius.com:8080'
-export JIRA_NAME='razius'
