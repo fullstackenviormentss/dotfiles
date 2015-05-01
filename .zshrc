@@ -64,3 +64,7 @@ DEFAULT_USER='razius'
 source ~/.exports
 source ~/.aliases
 source `which virtualenvwrapper.sh`
+
+if [[ -o login ]]; then
+    ssh-add ~/.ssh/*.prv
+fi

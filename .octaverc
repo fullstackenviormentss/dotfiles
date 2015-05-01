@@ -1,0 +1,6 @@
+warning("off", "Octave:broadcast");
+
+# Set the edit command's editor to VIM
+edit mode sync
+edit home .
+EDITOR('vim > /dev/tty 2>&1 < /dev/tty %s')

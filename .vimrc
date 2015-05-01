@@ -25,10 +25,9 @@
     set clipboard=unnamedplus               " Use the system clipboard for yank/put/delete.
     set omnifunc=syntaxcomplete#Complete    " Turn on Omni completion (smart autocompletion for programs).
     set ssop-=options                       " Do not store global and local values in a session.
-    set ssop-=folds                         " Do not store folds in a session.
     set relativenumber                      " Show line numbers as relative to current line.
     set autochdir                           " Automatically change to the directory of loaded file.
-    set tags=.ctags                         " Load ctags from the .ctags file.
+    set tags=.ctags;/                       " Load ctags from the .ctags file, check the current folder for tags file and keep going one directory up all the way to the root folder.
     set modelines=0
     set encoding=utf-8
     set ttyfast
@@ -41,13 +40,15 @@
 " Appearance {
     syntax enable               " Enable syntax highlighting.
     set t_Co=256                " Enable 256 colors. Don't forget TERM=xterm-256color
-    colorscheme rdark
+    colorscheme solarized
+    let g:solarized_termcolors=256
     let rdark_current_line = 1
     set background=dark         " Tell Vim to use colors which look good on a dark background.
     let g:rehash256 = 1
 
     if has("gui_running")
-        set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+        " set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+        set guifont=Inconsolata\ for\ Powerline\ Medium\ 12
         set guioptions-=m       " Remove menu bar
         set guioptions-=T       " Remove toolbar
         set guioptions-=r       " Remove right-hand scroll bar
@@ -57,7 +58,7 @@
 " }
 
 " Folding {
-    set foldmethod=syntax
+    set foldmethod=indent
     set foldlevel=99
     set foldlevelstart=99
 " }
@@ -113,15 +114,14 @@
 " #### Plugins loaded using Vundle ####
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim                           " Manually load Vundle.
+call vundle#begin('~/.vim/bundle/')
 call vundle#begin()
     Plugin 'gmarik/Vundle.vim'                              " Let Vundle manage himself.
     Plugin 'tpope/vim-fugitive'                             " Best git interface for Vim.
-    Plugin 'plasticboy/vim-markdown'                        " Markdown syntax highlighting.
     Plugin 'sjl/gundo.vim'                                  " Plugin to visualize your Vim undo tree. screenr.com/M9l
     Plugin 'bling/vim-airline'                              " Lean & mean status/tabline for vim that's light as air.
     Plugin 'scrooloose/nerdtree'                            " Allows you to explore your filesystem and to open files and directories.
     Plugin 'tpope/vim-surround'                             " Quoting/parenthesizing made simple.
-    Plugin 'nvie/vim-rst-tables'                            " Easily create and reformat your RST (reStructuredText) tables as you change cell content.
     Plugin 'scrooloose/syntastic'                           " Syntax checking hacks for vim.
     Plugin 'airblade/vim-gitgutter'                         " Shows a git diff in the gutter (sign column) and stages/reverts hunks.
     Plugin 'majutsushi/tagbar'                              " Displays tags in a window, ordered by scope.
@@ -135,8 +135,10 @@ call vundle#begin()
     Plugin 'ervandew/supertab'                              " Perform all your vim insert mode completions with Tab
     Plugin 'jmcantrell/vim-virtualenv'                      " Work with python virtualenvs in vim.
     Plugin 'Rykka/InstantRst'                               " Instant preview for rst files.
+    Plugin 'nvie/vim-rst-tables'                            " Easily create and reformat your RST (reStructuredText) tables as you change cell content.
     Plugin 'mileszs/ack.vim'                                " Plugin for the Perl module / CLI script 'ack'
     Plugin 'hynek/vim-python-pep8-indent'                   " Nicer indentation for python.
+    Plugin 'Yggdroot/indentLine'                            " A vim plugin to display the indention levels with thin vertical lines.
 
     " Syntax highliters.
     Plugin 'octave.vim'                                     " Syntax highlighting for the GNU Octave programming language.
@@ -145,8 +147,9 @@ call vundle#begin()
     Plugin 'chase/vim-ansible-yaml'                         " Support for Ansible.
     Plugin 'PotatoesMaster/i3-vim-syntax'                   " Displays tags in a window, ordered by scope.
     Plugin 'django.vim'                                     " Django syntax highliter.
+    Plugin 'plasticboy/vim-markdown'                        " Markdown syntax highlighting.
 
-    " Color themes.
+    " Color schemes.
     Plugin 'altercation/vim-colors-solarized'               " Solarized color scheme.
     Plugin 'tomasr/molokai'                                 " Monokai color scheme.
     Plugin 'jnurmine/Zenburn'                               " Zenburn color scheme.
@@ -170,7 +173,7 @@ filetype plugin indent on
 " }
 
 " Airline {
-    let g:airline_theme='molokai'
+    let g:airline_theme='solarized'
     let g:airline_powerline_fonts=1
     let g:airline#extensions#branch#enabled=1
     let g:airline#extensions#syntastic#enabled=1
@@ -214,7 +217,9 @@ filetype plugin indent on
 " #### Filetype settings ####
 " Python {
     autocmd BufWritePre *.py :%s/\s\+$//e " Remove trailing whitespace on save.
-    autocmd FileType python setlocal iskeyword-=_
+    autocmd BufRead *.py setlocal makeprg=python\ %
+    " autocmd BufRead *.py nmap <F5> :!python %<CR>
+    " autocmd FileType python setlocal iskeyword-=_
     " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
     " im :<CR> :<CR><TAB>
 
@@ -278,17 +283,19 @@ nnoremap <C-l> <C-w>l
 
 nnoremap [b :bprevious<cr>
 nnoremap ]b :bnext<cr>
-nnoremap <C-s> :update<CR>
 noremap <C-Tab> :bn<cr>
 noremap <C-S-Tab> :bp<cr>
 nnoremap <C-P> :CtrlP<cr>
 nnoremap <C-A-P> :CtrlPTag<cr>
+nnoremap <F5> :make<CR>
 
-map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>t :enew<cr>
+
+" Bring current selected text from visual mode into command line.
+vnoremap : y:<C-r>"<C-b>
 
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -298,12 +305,15 @@ autocmd InsertLeave *
     \     set nopaste |
     \ endif
 
-autocmd FocusLost * :wa                 " Save file when editor loses focus.
+" autocmd FocusLost * :wa                 " Save file when editor loses focus.
 
 " #### Custom commands and functions ####
 fun! Project(arg)
     " execute '!python ' . expand( '%' )
-    cd ~/Desktop/projects/unisport/code/
+    "
+    " let g:ProjectDir = "~/Desktop/projects/unisport/code/"
+    " cd vim.eval("g:ProjectDir")
+    " set tags = ProjectDir . "/.ctags"'
 endfunction
 command! -nargs=* Project call Project('<args>')
 
