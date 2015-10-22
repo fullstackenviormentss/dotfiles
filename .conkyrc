@@ -12,7 +12,7 @@ double_buffer yes
 minimum_size 250 150
 maximum_width 520
 draw_shades no
-draw_outline no
+draw_outline yes
 draw_borders no
 draw_graph_borders no
 alignment top_right
@@ -27,13 +27,13 @@ net_avg_samples 1
 override_utf8_locale yes
 #use_spacer yes
 
-default_color 000000
-default_shade_color 222222
-default_outline_color 333333
+color1 FCBE51
+color2 5BA876
+color3 FF7F4F
 
-color1 444444
-color2 333333
-color3 333333
+default_color FF7F4F
+default_shade_color 222222
+default_outline_color 32312B
 
 TEXT
 ${voffset 10}${color1}${font Helvetica:pixelsize=110}${time %H}${color3}:${color1}${time %M}${font}${voffset -70}${offset 10}${color2}${font Helvetica:pixelsize=32}${time %d} ${font Helvetica:pixelsize=32}${time  %b} ${time %Y}${font}${voffset 20}$color1}${font Helvetica:pixelsize=42}${offset -178}${time %A}${font}
