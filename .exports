@@ -7,9 +7,9 @@ PATHS=(
     '~/bin'
 )
 export PATH=${PATH}$(printf ":%s" "${PATHS[@]}")
-export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7/site-packages/
+# export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7/site-packages/
+# export PYTHONSTARTUP=~/.pyrc
 export SSH_KEY_PATH="~/.ssh/isa_id"
-export PYTHONSTARTUP=~/.pyrc
 
 export VAGRANT_DEFAULT_PROVIDER=lxc
 export ANSIBLE_NOCOWS=1
