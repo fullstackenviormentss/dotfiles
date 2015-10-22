@@ -20,8 +20,8 @@ assign [class="HipChat"] 10
 # workspace 1 output eDP1
 # workspace 2 output eDP1
 # workspace 3 output eDP1
-workspace 9 output DisplayPort-3
-workspace 10 output DisplayPort-3
+workspace 1 output DisplayPort-3
+workspace 10 output DisplayPort-2
 
 workspace_auto_back_and_forth no
 
@@ -34,6 +34,7 @@ for_window [title="^OpenCV$"] floating enable
 for_window [title="^Octave$"] floating enable
 for_window [class="^Octave$"] floating enable
 for_window [class="Display.im6"] floating enable
+for_window [title="^screenkey$"] floating enable
 
 ###########################
 # Look and feel
@@ -49,10 +50,10 @@ set $white #B0B0B0
 font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
 
 #<colorclass>           <border>        <background>    <text>          <indicator>
-client.focused          $light_gray     $light_gray     $white          $dark_gray
+client.focused          $light_gray     $light_gray     $dark_gray      $dark_gray
 client.focused_inactive $dark_gray      $dark_gray      $light_gray     $dark_gray
 client.unfocused        $dark_gray      $dark_gray      $light_gray     $dark_gray
-client.urgent           $dark_gray      $dark_gray      $light_green    $dark_gray
+client.urgent           $light_green    $light_green    $dark_gray      $dark_gray
 
 # colorclass <border> <background> <text>
 bar {
@@ -95,7 +96,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23
 bindsym $mod+d exec rofi -show run -levenshtein-sort -location 2 -width 100 -lines 5 -fixed-num-lines -font Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 -fg "$light_gray" -bg "$dark_gray" -hlfg "$dark_gray" -hlbg "$light_green" -bw 0 -bc "$light_green" -yoffset -2 -xoffset 0 -hmode false
 # ,$white,$light_green,$light_green,$white
-bindsym $mod+Escape exec blur_lock
+bindsym $mod+Shift+Escape exec blur_lock
 
 # change focus
 bindsym $mod+h focus left
@@ -167,7 +168,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86Favorites exec thunar
 bindsym XF86Calculator exec gnome-calculator
-bindsym XF86Launch5 exec gview
+bindsym XF86Launch5 exec gnome-terminal --title="Neovim" -e gnvim
 bindsym XF86Launch6 exec google-chrome --app=http://google.com
 bindsym XF86Launch7 exec "pkill -9 hipchat; hipchat &"
 bindsym XF86Launch8 exec homebank
@@ -190,10 +191,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         # bindsym Left resize shrink width 10 px or 10 ppt
