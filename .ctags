@@ -1,0 +1,7 @@
+--recurse=yes
+--tag-relative=yes
+--exclude='.git'
+--exclude='*.log'
+--languages=python
+--fields=+l
+-f .ctagsfile
