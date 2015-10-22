@@ -47,14 +47,17 @@ ZSH_THEME="agnoster"
 plugins=(
     adb
     colorize
-    jira
     gitignore
     git
     zsh-syntax-highlighting
     last-working-dir
     pip
     vagrant
-    jira
+    python
+    redis-cli
+    ssh-agent
+    vagrant
+    virtualenvwrapper
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -63,6 +66,7 @@ source $ZSH/oh-my-zsh.sh
 DEFAULT_USER='razius'
 source ~/.exports
 source ~/.aliases
+source ~/bin/base16-shell/base16-eighties.dark.sh
 source `which virtualenvwrapper.sh`
 
 if [[ -o login ]]; then
