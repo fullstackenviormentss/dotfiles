@@ -55,9 +55,7 @@ plugins=(
     vagrant
     python
     redis-cli
-    ssh-agent
     vagrant
-    virtualenvwrapper
 )
 
 source $ZSH/oh-my-zsh.sh
