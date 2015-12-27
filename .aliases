@@ -3,7 +3,7 @@ alias nautilus='nautilus --no-desktop'
 alias google-chrome='google-chrome --disk-cache-dir=/tmp/chrome --disk-cache-size=20480000'
 alias nitrogen='nitrogen ~/Pictures/wallpapers/'
 alias feh='feh --auto-zoom --scale-down'
-alias grep='grep --color=auto --exclude '\''.ctags'\'' --exclude '\''*.pyc'\'' --exclude-dir '\''.git'\'''
+alias grep='grep --color=auto --exclude '\''.ctagsfile'\'' --exclude '\''*.pyc'\'' --exclude-dir '\''.git'\'''
 alias lsof='lsof -nPi'
 
 # Suffix aliases - "Open with ..."
