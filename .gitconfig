@@ -10,7 +10,7 @@
 [core]
         whitespace = trailing-space,space-before-tab
 	editor = vim
-	excludesfile = /home/razius/.gitconfig_core_excludes
+	excludesfile = ~/.gitconfig_core_excludes
 	autocrlf = input
 [apply]
         whitespace = fix
@@ -19,7 +19,7 @@
 [pull]
 	default = current
 [commit]
-	template = /home/razius/.gitconfig_commit_template
+	template = ~/.gitconfig_commit_template
 [color]
 	ui = true
 [mergetool]
