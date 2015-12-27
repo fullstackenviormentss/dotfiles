@@ -13,12 +13,14 @@
     set statusline+=%f                      " Add full file path to your existing statusline
     set novisualbell                        " No visual bell.
     set autoread                            " Reload files changed outside vim.
+    set title                               " Set the title for the terminal window.
     set history=1000                        " Store lots of :cmdline history.
     set wildmode=list:longest               " TAB completion in command mode. When more than one match, list all matches and complete till longest common string.
     set wildmenu
-    set list listchars=tab:\ \ ,trail:·     " Display tabs and trailing spaces viually.
+    set list listchars=tab:\»\ ,trail:·,eol:¬     " Display tabs and trailing spaces viually.
     set mouse=a                             " Mouse compatibility.
     set mousehide                           " Hide the mouse cursor while typing
+
     set hidden                              " Allow buffer switching without saving
     set cursorline                          " Highlight current line
     set backspace=indent,eol,start          " Backspace for dummies
@@ -27,24 +29,87 @@
     set ssop-=options                       " Do not store global and local values in a session.
     set relativenumber                      " Show line numbers as relative to current line.
     set autochdir                           " Automatically change to the directory of loaded file.
-    set tags=.ctags;/                       " Load ctags from the .ctags file, check the current folder for tags file and keep going one directory up all the way to the root folder.
+    set tags=.ctagsfile;/                   " Load ctags from the .ctags file, check the current folder for tags file and keep going one directory up all the way to the root folder.
     set modelines=0
-    set encoding=utf-8
-    set ttyfast
+    " set encoding=utf-8
+    set ttyfast                             " Indicates a fast terminal connection.
+    set lazyredraw                          " Buffer screen updates instead of updating all the time.
     set scrolloff=3                         " Minimal number of screen lines to keep above and below the cursor.
+    " set ttyscroll=3
+    set synmaxcol=128                       " " Syntax coloring lines that are too long just slows down everything.
+    set ssop-=options    " do not store global and local values in a session
+    set ssop-=folds      " do not store folds
     let &showbreak='↪ '                     " String to put at the start of lines that have been wrapped.
     autocmd! bufwritepost .vimrc source %   " Autoreload .vimrc on save.
     syntax on                               " Turn on syntax highlighting.
 " }
 
+" #### Plugins loaded using Vundle ####
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim                           " Manually load Vundle.
+call vundle#begin('~/.vim/bundle/')
+call vundle#begin()
+    Plugin 'gmarik/Vundle.vim'                              " Let Vundle manage himself.
+    Plugin 'tpope/vim-fugitive'                             " Best git interface for Vim.
+    Plugin 'sjl/gundo.vim'                                  " Plugin to visualize your Vim undo tree. screenr.com/M9l
+    Plugin 'bling/vim-airline'                              " Lean & mean status/tabline for vim that's light as air.
+    Plugin 'scrooloose/nerdtree'                            " Allows you to explore your filesystem and to open files and directories.
+    Plugin 'tpope/vim-surround'                             " Quoting/parenthesizing made simple.
+    Plugin 'scrooloose/syntastic'                           " Syntax checking hacks for vim.
+    Plugin 'airblade/vim-gitgutter'                         " Shows a git diff in the gutter (sign column) and stages/reverts hunks.
+    Plugin 'majutsushi/tagbar'                              " Displays tags in a window, ordered by scope.
+    Plugin 'kien/ctrlp.vim'                                 " Fuzzy file, buffer, mru, tag, etc finder.
+    Plugin 'Valloric/YouCompleteMe'                         " Autocompletion library.
+    Plugin 'MarcWeber/vim-addon-mw-utils'                   " Interpret a file by function and cache file automatically
+    " Plugin 'garbas/vim-snipmate'                            " Implements some of TextMate's snippets features in Vim.
+    Plugin 'SirVer/ultisnips'                               " Snippets.
+    Plugin 'vim-scripts/tlib'                               " Some utility functions.
+    Plugin 'Rykka/InstantRst'                               " Instant preview for rst files.
+    Plugin 'nvie/vim-rst-tables'                            " Easily create and reformat your RST (reStructuredText) tables as you change cell content.
+    Plugin 'mileszs/ack.vim'                                " Plugin for the Perl module / CLI script 'ack'
+    Plugin 'hynek/vim-python-pep8-indent'                   " Nicer indentation for python.
+    Plugin 'Yggdroot/indentLine'                            " A vim plugin to display the indention levels with thin vertical lines.
+
+    " Syntax highliters.
+    Plugin 'octave.vim'                                     " Syntax highlighting for the GNU Octave programming language.
+    Plugin 'Rykka/riv.vim'                                  " reStructuredText.
+    Plugin 'rodjek/vim-puppet'                              " Puppet niceties for your Vim setup.
+    Plugin 'chase/vim-ansible-yaml'                         " Support for Ansible.
+    Plugin 'PotatoesMaster/i3-vim-syntax'                   " Displays tags in a window, ordered by scope.
+    Plugin 'django.vim'                                     " Django syntax highliter.
+    Plugin 'plasticboy/vim-markdown'                        " Markdown syntax highlighting.
+
+    " Color schemes.
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'tomasr/molokai'
+    Plugin 'jnurmine/Zenburn'
+    Plugin 'chriskempson/base16-vim'
+
+    "Language specific
+    Plugin 'fatih/vim-go'
+    Plugin 'tmhedberg/SimpylFold'                           " No-BS Python code folding for Vim
+    Plugin 'jmcantrell/vim-virtualenv'                      " Work with python virtualenvs in vim.
+    Plugin 'elixir-lang/vim-elixir'                         " Elixir support for vim. This plugin also adds support for Elixir's templating language, EEx.
+
+call vundle#end()
+filetype plugin indent on
+
 " Appearance {
     syntax enable               " Enable syntax highlighting.
-    set t_Co=256                " Enable 256 colors. Don't forget TERM=xterm-256color
-    colorscheme solarized
-    let g:solarized_termcolors=256
-    let rdark_current_line = 1
     set background=dark         " Tell Vim to use colors which look good on a dark background.
-    let g:rehash256 = 1
+    set t_Co=256                " Enable 256 colors. Don't forget TERM=xterm-256color
+    " let g:solarized_termtrans=1
+    " let g:solarized_termcolors=256
+    " let g:solarized_contrast="high"
+    " let g:solarized_visibility="high"
+    " let rdark_current_line = 1
+    " let g:rehash256 = 1
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+    let base16colorspace=256
+    colorscheme base16-eighties
+    highlight NonText ctermfg=237 guifg=#4a4a59
+    highlight SpecialKey ctermfg=237 guifg=#4a4a59
 
     if has("gui_running")
         " set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
@@ -58,9 +123,10 @@
 " }
 
 " Folding {
+    " set nofoldenable
     set foldmethod=indent
     set foldlevel=99
-    set foldlevelstart=99
+    " set foldlevelstart=99
 " }
 
 " Indentation {
@@ -82,7 +148,7 @@
     set wrapmargin=0                            " Don't wrap based on terminal size.
     " Highlight characters that extend beyong the word wrap column.
     set colorcolumn=-1
-    highlight ColorColumn ctermbg=lightgrey guibg=#1A1F21
+    highlight ColorColumn ctermbg=234 guibg=#1A1F21
     " augroup vimrc_autocmds
     "     autocmd BufEnter * highlight OverLength ctermbg=red guibg=#2C3538
     "     autocmd BufEnter * match OverLength /\%79v.\+/
@@ -111,51 +177,6 @@
     vnoremap <tab> %
 " }
 
-" #### Plugins loaded using Vundle ####
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim                           " Manually load Vundle.
-call vundle#begin('~/.vim/bundle/')
-call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'                              " Let Vundle manage himself.
-    Plugin 'tpope/vim-fugitive'                             " Best git interface for Vim.
-    Plugin 'sjl/gundo.vim'                                  " Plugin to visualize your Vim undo tree. screenr.com/M9l
-    Plugin 'bling/vim-airline'                              " Lean & mean status/tabline for vim that's light as air.
-    Plugin 'scrooloose/nerdtree'                            " Allows you to explore your filesystem and to open files and directories.
-    Plugin 'tpope/vim-surround'                             " Quoting/parenthesizing made simple.
-    Plugin 'scrooloose/syntastic'                           " Syntax checking hacks for vim.
-    Plugin 'airblade/vim-gitgutter'                         " Shows a git diff in the gutter (sign column) and stages/reverts hunks.
-    Plugin 'majutsushi/tagbar'                              " Displays tags in a window, ordered by scope.
-    Plugin 'kien/ctrlp.vim'                                 " Fuzzy file, buffer, mru, tag, etc finder.
-    Plugin 'nvie/vim-flake8'                                " Flake8 plugin for Vim.
-    Plugin 'Shougo/neocomplete.vim'                         " Next generation completion framework after neocomplcache.
-    Plugin 'MarcWeber/vim-addon-mw-utils'                   " Interpret a file by function and cache file automatically
-    Plugin 'garbas/vim-snipmate'                            " Implements some of TextMate's snippets features in Vim.
-    Plugin 'vim-scripts/tlib'                               " Some utility functions.
-    Plugin 'davidhalter/jedi-vim'                           " awesome Python autocompletion with VIM
-    Plugin 'ervandew/supertab'                              " Perform all your vim insert mode completions with Tab
-    Plugin 'jmcantrell/vim-virtualenv'                      " Work with python virtualenvs in vim.
-    Plugin 'Rykka/InstantRst'                               " Instant preview for rst files.
-    Plugin 'nvie/vim-rst-tables'                            " Easily create and reformat your RST (reStructuredText) tables as you change cell content.
-    Plugin 'mileszs/ack.vim'                                " Plugin for the Perl module / CLI script 'ack'
-    Plugin 'hynek/vim-python-pep8-indent'                   " Nicer indentation for python.
-    Plugin 'Yggdroot/indentLine'                            " A vim plugin to display the indention levels with thin vertical lines.
-
-    " Syntax highliters.
-    Plugin 'octave.vim'                                     " Syntax highlighting for the GNU Octave programming language.
-    Plugin 'Rykka/riv.vim'                                  " reStructuredText.
-    Plugin 'rodjek/vim-puppet'                              " Puppet niceties for your Vim setup.
-    Plugin 'chase/vim-ansible-yaml'                         " Support for Ansible.
-    Plugin 'PotatoesMaster/i3-vim-syntax'                   " Displays tags in a window, ordered by scope.
-    Plugin 'django.vim'                                     " Django syntax highliter.
-    Plugin 'plasticboy/vim-markdown'                        " Markdown syntax highlighting.
-
-    " Color schemes.
-    Plugin 'altercation/vim-colors-solarized'               " Solarized color scheme.
-    Plugin 'tomasr/molokai'                                 " Monokai color scheme.
-    Plugin 'jnurmine/Zenburn'                               " Zenburn color scheme.
-call vundle#end()
-filetype plugin indent on
-
 " #### Plugin settings ####
 
 " Jedi {
@@ -173,7 +194,7 @@ filetype plugin indent on
 " }
 
 " Airline {
-    let g:airline_theme='solarized'
+    let g:airline_theme='bubblegum'
     let g:airline_powerline_fonts=1
     let g:airline#extensions#branch#enabled=1
     let g:airline#extensions#syntastic#enabled=1
@@ -184,10 +205,24 @@ filetype plugin indent on
     " let g:airline#extensions#tabline#left_alt_sep ='|'
 " }
 
+" YouCompleteMe {
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+" }
+
 " Syntastic {
     let g:syntastic_javascript_checkers = ['jshint']
-    let g:syntastic_python_checkers = ['pylint', 'python', 'flake8']
-    let g:syntastic_python_pylint_exec = 'pylint --load-plugins pylint_django'
+    let g:syntastic_python_checkers = ['flake8']
+    " let g:syntastic_python_pylint_exec = 'pylint'
+    let g:syntastic_python_pylint_args = ['--load-plugins', 'pylint_django']
+    " let g:syntastic_python_checkers = ['prospector']
+    " let g:syntastic_python_prospector_exec = 'prospector --uses django --messages-only --absolute-paths --die-on-tool-error --zero-exit --output-format json'
+    " let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity 10'
+    " let g:syntastic_debug = 1
+    " let g:syntastic_shell = 'bin/bash'
     " set statusline+=%#warningmsg#
     " set statusline+=%{SyntasticStatuslineFlag()}
     " set statusline+=%*
@@ -212,12 +247,47 @@ filetype plugin indent on
     set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
     set wildignore+=*.pyc
     set wildignore+=*/venv/*
+    set wildignore+=*/build/*
+" }
+
+" UltiSnip {
+    let g:UltiSnipsExpandTrigger="<c-s>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " let g:UltiSnipsSnippetsDir=expand('~/.dotfiles/snippets/')
+    let g:UltiSnipsSnippetDirectories=['ultisnips']
+" }
+
+" SimplyIFold {
+    let g:SimpylFold_docstring_preview = 1
+" }
+"
+" Tagbar {
+    let g:tagbar_type_elixir = {
+        \ 'ctagstype' : 'elixir',
+        \ 'kinds' : [
+            \ 'f:functions',
+            \ 'functions:functions',
+            \ 'c:callbacks',
+            \ 'd:delegates',
+            \ 'e:exceptions',
+            \ 'i:implementations',
+            \ 'a:macros',
+            \ 'o:operators',
+            \ 'm:modules',
+            \ 'p:protocols',
+            \ 'r:records'
+        \ ]
+    \ }
 " }
 
 " #### Filetype settings ####
 " Python {
     autocmd BufWritePre *.py :%s/\s\+$//e " Remove trailing whitespace on save.
     autocmd BufRead *.py setlocal makeprg=python\ %
+    autocmd FileType python setlocal commentstring=#\ %s
+    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
     " autocmd BufRead *.py nmap <F5> :!python %<CR>
     " autocmd FileType python setlocal iskeyword-=_
     " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -229,13 +299,14 @@ autocmd FileType make setlocal noexpandtab
 " Differrent shift width {
     augroup different_shiftwidth
         autocmd!
-        autocmd FileType html,yaml,json,css,javascript setlocal shiftwidth=2
+        autocmd FileType html,yaml,json,css,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+        autocmd BufRead,BufNewFile Vagrantfile setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
     augroup END
 " }
 " Automatically enable spellchecking. {
     augroup auto_spellchecking
         autocmd!
-        autocmd FileType rst setlocal spell
+        autocmd FileType rst setlocal spell spelllang=en_us
     augroup END
 " }
 " Autocompletion functions {
@@ -289,13 +360,16 @@ nnoremap <C-P> :CtrlP<cr>
 nnoremap <C-A-P> :CtrlPTag<cr>
 nnoremap <F5> :make<CR>
 
-map <leader>g :GundoToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
-nmap <leader>t :enew<cr>
+noremap <leader>g :GundoToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
+noremap <F8> :TagbarToggle<CR>
+noremap <leader>t :enew<cr>
 
 " Bring current selected text from visual mode into command line.
 vnoremap : y:<C-r>"<C-b>
+
+" imap <C-J> <Plug>snipMateNextOrTrigger
+" smap <C-J> <Plug>snipMateNextOrTrigger
 
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -317,14 +391,26 @@ fun! Project(arg)
 endfunction
 command! -nargs=* Project call Project('<args>')
 
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
 " Add the virtualenv's site-packages to vim path
-" py << EOF
-" import os.path
-" import sys
-" import vim
-" if 'VIRTUAL_ENV' in os.environ:
-"     project_base_dir = os.environ['VIRTUAL_ENV']
-"     sys.path.insert(0, project_base_dir)
-"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"     execfile(activate_this, dict(__file__=activate_this))
-" EOF
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
