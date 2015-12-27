@@ -1,41 +1,58 @@
-general {
-  colors = true
-  interval = 4
-  color_good = "#B8D597"
-  color_degraded = "#00FF00"
-  color_bad = "#FF8282"
-}
-
 order += "disk /"
 order += "disk /media/storage"
 order += "battery 0"
 order += "volume master"
 order += "time"
+order += "tztime cph"
+
+general {
+    colors = true
+    interval = 4
+    color_good = "#B8D597"
+    color_degraded = "#00FF00"
+    color_bad = "#FF8282"
+}
 
 battery 0 {
-  format = "🔋 %status %percentage %remaining"
-  integer_battery_capacity = true
-  last_full_capacity = true
-  threshold_type = percentage
-  low_threshold = 10
+    status_chr = " "
+    status_bat = " "
+    status_full = " "
+    low_threshold = 10
+    threshold_type = time
+    integer_battery_capacity = true
+    last_full_capacity = true
+    threshold_type = percentage
+    hide_seconds = true
+    low_threshold = 10
+}
+
+tztime cph {
+    format = "   %H:%M"
+    timezone = Europe/Copenhagen
 }
 
 time {
-  format = " %d.%m  %H:%M"
+    format = "  %d.%m"
 }
 
 disk "/" {
-  format = "  %free"
+    format = "  %avail"
+    prefix_type = custom
+    low_threshold = 5
+    threshold_type = percentage_free
 }
 
 disk "/media/storage" {
-  format = " %free"
+    format = "  %avail"
+    prefix_type = custom
+    low_threshold = 5
+    threshold_type = percentage_free
 }
 
 volume master {
-  format = " %volume"
-  format_muted = " %volume"
-  device = "default"
-  mixer = "Master"
-  mixer_idx = 0
+    format = " %volume"
+    format_muted = " %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
 }

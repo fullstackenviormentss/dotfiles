@@ -6,9 +6,9 @@ set $mod Mod4
 
 workspace_layout tabbed
 default_orientation auto
-new_window pixel 5
-new_float pixel 5
-# hide_edge_borders vertical
+new_window pixel 3
+new_float pixel 3
+hide_edge_borders both
 
 # Assign window to specific workspace
 # assign <criteria> workspace
@@ -41,11 +41,12 @@ for_window [title="^screenkey$"] floating enable
 ###########################
 
 # Color definitions
-set $dark_gray #292929
+set $black #222222
+set $dark_gray #222222
 set $medium_gray #3F3F3F
 set $light_gray #5F676A
 set $light_green #B8D597
-set $white #B0B0B0
+set $white #DDCCAA
 
 font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
 
@@ -57,22 +58,24 @@ client.urgent           $light_green    $light_green    $dark_gray      $dark_gr
 
 # colorclass <border> <background> <text>
 bar {
+    font pango:FontAwesome, Icons 10
     status_command i3status --config ~/.i3/status
     mode dock
     position top
     workspace_buttons yes
     colors {
         background  $dark_gray
-        separator   $dark_gray
+        separator   $medium_gray
         statusline  $white
 
         # colorclass        <border>        <background>    <text>
         focused_workspace   $light_green    $light_green    $dark_gray
         active_workspace    $dark_gray      $dark_gray      $light_green
-        inactive_workspace  $dark_gray      $dark_gray      $white
+        inactive_workspace  $medium_gray    $medium_gray    $white
         urgent_workspace    $light_green    $light_green    $dark_gray
     }
     # tray_output primary
+    separator_symbol "  "
     binding_mode_indicator yes
 }
 
@@ -96,7 +99,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23
 bindsym $mod+d exec rofi -show run -levenshtein-sort -location 2 -width 100 -lines 5 -fixed-num-lines -font Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 -fg "$light_gray" -bg "$dark_gray" -hlfg "$dark_gray" -hlbg "$light_green" -bw 0 -bc "$light_green" -yoffset -2 -xoffset 0 -hmode false
 # ,$white,$light_green,$light_green,$white
-bindsym $mod+Shift+Escape exec blur_lock
+bindsym $mod+Shift+Escape exec lock_screen
 
 # change focus
 bindsym $mod+h focus left
@@ -161,11 +164,11 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # multimedia keys
-bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-10%'
-bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+10%'
-bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 0
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86AudioLowerVolume exec change_volume -5
+bindsym XF86AudioRaiseVolume exec change_volume +5
+bindsym XF86AudioMute exec change_volume 0
+bindsym XF86MonBrightnessUp exec change_brightness +5
+bindsym XF86MonBrightnessDown exec change_brightness -5
 bindsym XF86Favorites exec thunar
 bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Launch5 exec gnome-terminal --title="Neovim" -e gnvim
