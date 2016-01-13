@@ -17,3 +17,7 @@ export ANSIBLE_NOCOWS=1
 export WORKON_HOME=~/.virtualenvs
 export NOTES_FOLDER=~/Desktop/notes
 export PROJECTS_DIR=~/Desktop/projects
+
+export TERMINAL=gnome-terminal
+export EDITOR=vim
+export VISUAL=gvim
