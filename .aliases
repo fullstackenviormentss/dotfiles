@@ -5,6 +5,7 @@ alias nitrogen='nitrogen ~/Pictures/wallpapers/'
 alias feh='feh --auto-zoom --scale-down'
 alias grep='grep --color=auto --exclude '\''.ctagsfile'\'' --exclude '\''*.pyc'\'' --exclude-dir '\''.git'\'''
 alias lsof='lsof -nPi'
+alias todo='todo.sh -d ~/.todo.cfg'
 
 # Suffix aliases - "Open with ..."
 alias -s log='tail -f'
