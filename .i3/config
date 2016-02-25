@@ -8,7 +8,7 @@ workspace_layout tabbed
 default_orientation auto
 new_window pixel 3
 new_float pixel 3
-hide_edge_borders both
+# hide_edge_borders both
 
 # Assign window to specific workspace
 # assign <criteria> workspace
@@ -17,11 +17,15 @@ assign [class="HipChat"] 10
 
 # Automatically put workspaces on specific screens
 # workspace <workspace> output <output>
-# workspace 1 output eDP1
-# workspace 2 output eDP1
-# workspace 3 output eDP1
-workspace 1 output DisplayPort-3
-workspace 10 output DisplayPort-2
+workspace 1 output eDP1
+workspace 2 output eDP1
+workspace 3 output eDP1
+
+workspace 1 output DP2-2
+workspace 2 output DP2-2
+workspace 3 output DP2-2
+
+workspace 10 output DP2-1
 
 workspace_auto_back_and_forth no
 
@@ -35,6 +39,7 @@ for_window [title="^Octave$"] floating enable
 for_window [class="^Octave$"] floating enable
 for_window [class="Display.im6"] floating enable
 for_window [title="^screenkey$"] floating enable
+for_window [class="^Notifyconf$"] floating enable
 
 ###########################
 # Look and feel
@@ -48,17 +53,17 @@ set $light_gray #5F676A
 set $light_green #B8D597
 set $white #DDCCAA
 
-font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 
 #<colorclass>           <border>        <background>    <text>          <indicator>
 client.focused          $light_gray     $light_gray     $dark_gray      $dark_gray
-client.focused_inactive $dark_gray      $dark_gray      $light_gray     $dark_gray
-client.unfocused        $dark_gray      $dark_gray      $light_gray     $dark_gray
+client.focused_inactive $medium_gray    $medium_gray    $light_gray     $dark_gray
+client.unfocused        $medium_gray    $medium_gray    $light_gray     $dark_gray
 client.urgent           $light_green    $light_green    $dark_gray      $dark_gray
 
 # colorclass <border> <background> <text>
 bar {
-    font pango:FontAwesome, Icons 10
+    font pango:Source\ Code\ Pro\ for\ Powerline\ Medium\ 11
     status_command i3status --config ~/.i3/status
     mode dock
     position top
