@@ -42,6 +42,10 @@
     let &showbreak='↪ '                     " String to put at the start of lines that have been wrapped.
     autocmd! bufwritepost .vimrc source %   " Autoreload .vimrc on save.
     syntax on                               " Turn on syntax highlighting.
+    " change cursor to i-beam in insert mode
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q" 
+    let &t_EI = "\<Esc>[2 q"
 " }
 
 " #### Plugins loaded using Vundle ####
@@ -52,13 +56,14 @@ call vundle#begin()
     Plugin 'gmarik/Vundle.vim'                              " Let Vundle manage himself.
     Plugin 'tpope/vim-fugitive'                             " Best git interface for Vim.
     Plugin 'sjl/gundo.vim'                                  " Plugin to visualize your Vim undo tree. screenr.com/M9l
-    Plugin 'bling/vim-airline'                              " Lean & mean status/tabline for vim that's light as air.
+    Plugin 'vim-airline/vim-airline'                        " Lean & mean status/tabline for vim that's light as air.
+    Plugin 'vim-airline/vim-airline-themes'
     Plugin 'scrooloose/nerdtree'                            " Allows you to explore your filesystem and to open files and directories.
     Plugin 'tpope/vim-surround'                             " Quoting/parenthesizing made simple.
     Plugin 'scrooloose/syntastic'                           " Syntax checking hacks for vim.
     Plugin 'airblade/vim-gitgutter'                         " Shows a git diff in the gutter (sign column) and stages/reverts hunks.
     Plugin 'majutsushi/tagbar'                              " Displays tags in a window, ordered by scope.
-    Plugin 'kien/ctrlp.vim'                                 " Fuzzy file, buffer, mru, tag, etc finder.
+    Plugin 'ctrlpvim/ctrlp.vim'                             " Fuzzy file, buffer, mru, tag, etc finder.
     Plugin 'Valloric/YouCompleteMe'                         " Autocompletion library.
     Plugin 'MarcWeber/vim-addon-mw-utils'                   " Interpret a file by function and cache file automatically
     " Plugin 'garbas/vim-snipmate'                            " Implements some of TextMate's snippets features in Vim.
@@ -69,6 +74,7 @@ call vundle#begin()
     Plugin 'mileszs/ack.vim'                                " Plugin for the Perl module / CLI script 'ack'
     Plugin 'hynek/vim-python-pep8-indent'                   " Nicer indentation for python.
     Plugin 'Yggdroot/indentLine'                            " A vim plugin to display the indention levels with thin vertical lines.
+    Plugin 'freitass/todo.txt-vim'                          " Vim plugin for Todo.txt
 
     " Syntax highliters.
     Plugin 'octave.vim'                                     " Syntax highlighting for the GNU Octave programming language.
@@ -206,7 +212,7 @@ filetype plugin indent on
 " }
 
 " YouCompleteMe {
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_collect_identifiers_from_tags_files = 0 " Let YCM read tags from Ctags file
 let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
@@ -215,9 +221,10 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 
 " Syntastic {
     let g:syntastic_javascript_checkers = ['jshint']
-    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_python_checkers = ['pyflakes', 'flake8']
+    let g:syntastic_python_flake8_args = ['--ignore', 'E501,E402']
     " let g:syntastic_python_pylint_exec = 'pylint'
-    let g:syntastic_python_pylint_args = ['--load-plugins', 'pylint_django']
+    " let g:syntastic_python_pylint_args = ['--load-plugins', 'pylint_django', '--ignore', 'E501']
     " let g:syntastic_python_checkers = ['prospector']
     " let g:syntastic_python_prospector_exec = 'prospector --uses django --messages-only --absolute-paths --die-on-tool-error --zero-exit --output-format json'
     " let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity 10'
@@ -404,13 +411,13 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 " Add the virtualenv's site-packages to vim path
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
+" py << EOF
+" import os.path
+" import sys
+" import vim
+" if 'VIRTUAL_ENV' in os.environ:
+"     project_base_dir = os.environ['VIRTUAL_ENV']
+"     sys.path.insert(0, project_base_dir)
+"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"     execfile(activate_this, dict(__file__=activate_this))
+" EOF
