@@ -153,8 +153,8 @@ filetype plugin indent on
     set formatoptions=qrn1                      " Automatic wrapping enabled.
     set wrapmargin=0                            " Don't wrap based on terminal size.
     " Highlight characters that extend beyong the word wrap column.
-    set colorcolumn=-1
-    highlight ColorColumn ctermbg=234 guibg=#1A1F21
+    set colorcolumn=-1,112
+    highlight ColorColumn ctermbg=234 guibg=#2B2B2B
     " augroup vimrc_autocmds
     "     autocmd BufEnter * highlight OverLength ctermbg=red guibg=#2C3538
     "     autocmd BufEnter * match OverLength /\%79v.\+/
