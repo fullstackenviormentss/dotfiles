@@ -13,19 +13,19 @@ new_float pixel 3
 # Assign window to specific workspace
 # assign <criteria> workspace
 assign [class="Google-chrome"] 1
-assign [class="HipChat"] 10
+assign [class="Slack"] 10
 
 # Automatically put workspaces on specific screens
 # workspace <workspace> output <output>
-workspace 1 output eDP1
-workspace 2 output eDP1
-workspace 3 output eDP1
-
-workspace 1 output DP2-2
-workspace 2 output DP2-2
-workspace 3 output DP2-2
-
-workspace 10 output DP2-1
+# workspace 1 output eDP1
+# workspace 2 output eDP1
+# workspace 3 output eDP1
+# 
+# workspace 1 output DP2-2
+# workspace 2 output DP2-2
+# workspace 3 output DP2-2
+# 
+# workspace 10 output DP2-1
 
 workspace_auto_back_and_forth no
 
@@ -35,6 +35,7 @@ for_window [class="Gcalctool"] floating enable
 for_window [class="Gnome-control-center.real"] floating enable
 for_window [class="Gcolor2"] floating enable
 for_window [title="^OpenCV$"] floating enable
+for_window [title="^opencv$"] floating enable
 for_window [title="^Octave$"] floating enable
 for_window [class="^Octave$"] floating enable
 for_window [class="Display.im6"] floating enable
@@ -103,6 +104,7 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23 -hist ~/.dmenu_hist
 # bindsym $mod+d exec dmenu_run -p '>' -i -nb '$dark_gray' -nf '$white' -sb '$light_green' -sf '$dark_gray' -fn 'Inconsolata-10' -dim 0.5 -h 23
 bindsym $mod+d exec rofi -show run -levenshtein-sort -location 2 -width 100 -lines 5 -fixed-num-lines -font Source\ Code\ Pro\ for\ Powerline\ Medium\ 10 -fg "$light_gray" -bg "$dark_gray" -hlfg "$dark_gray" -hlbg "$light_green" -bw 0 -bc "$light_green" -yoffset -2 -xoffset 0 -hmode false
+
 # ,$white,$light_green,$light_green,$white
 bindsym $mod+Shift+Escape exec lock_screen
 
@@ -178,7 +180,6 @@ bindsym XF86Favorites exec thunar
 bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Launch5 exec gnome-terminal --title="Neovim" -e gnvim
 bindsym XF86Launch6 exec google-chrome --app=http://google.com
-bindsym XF86Launch7 exec "pkill -9 hipchat; hipchat &"
 bindsym XF86Launch8 exec homebank
 bindsym Print exec scrot ~/Pictures/screenshots/%Y-%m-%d_%s.png
 
